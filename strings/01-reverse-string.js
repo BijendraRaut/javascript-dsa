@@ -27,4 +27,10 @@ function reverseStr(str) {
   return newStr;
 }
 
+// Alternative using built-in methods
+
+function reverseText(str) {
+  return str.split("").reverse().join("");
+}
+
 console.log(reverseStr("hello"));
