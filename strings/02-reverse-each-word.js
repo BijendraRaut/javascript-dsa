@@ -7,6 +7,15 @@ Input:
 Output:
 "I evol tpircSavaJ"
 
+Approach:
+1. Extract each word.
+2. Reverse each word.
+3. Append it to the result.
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+
 */
 function reverseStr(str) {
   let newStr = "";
@@ -15,6 +24,30 @@ function reverseStr(str) {
     newStr += str[i];
   }
   return newStr;
+}
+
+function normaliseSpaces(str) {
+  let result = "";
+  let i = 0;
+
+  while (i < str.length) {
+    // Skip spaces
+    while (i < str.length && str[i] === " ") {
+      i++;
+    }
+
+    // Add a space before every word except the first
+    if (result.length > 0 && i < str.length) {
+      result += " ";
+    }
+
+    // Copy the word
+    while (i < str.length && str[i] !== " ") {
+      result += str[i];
+      i++;
+    }
+  }
+  return result;
 }
 
 function reverseWordStr(str) {
@@ -29,7 +62,7 @@ function reverseWordStr(str) {
     }
   }
   result += reverseStr(currentWord);
-  return result;
+  return normaliseSpaces(result);
 }
 
-console.log(reverseWordStr("I love JavaScript"));
+console.log(reverseWordStr("I     love      JavaScript       "));
