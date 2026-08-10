@@ -65,4 +65,15 @@ function reverseWordStr(str) {
   return normaliseSpaces(result);
 }
 
-console.log(reverseWordStr("I     love      JavaScript       "));
+function reverseWord(str) {
+  let result = str
+    .trim()
+    .split(/\s+/)
+    // we can't built-in reverse funtion here instead we map each word and reverse
+    .map((word) => reverseStr(word))
+    // if we will not join it give response in array instead only join it will give array separated and when you give " " then comes
+    .join(" ");
+  return result;
+}
+
+console.log(reverseWordStr("I  love JavaScript"));
