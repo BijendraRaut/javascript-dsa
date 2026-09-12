@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h2>To Do App</h2>
+      <p>Developing beast mode on</p>
+
+      <nav>
+        <ul>
+          <li><a href="semantic.html">Semantic</a></li>
+          <li><a href="todo.html">To Do</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h2>To do list</h2>
+
+        <form>
+          <input id="todotext" type="text" placeholder="list your tasks" />
+          <button>Add</button>
+        </form>
+
+        <ul id="todolist"></ul>
+      </section>
+    </main>
+  </body>
+  <script>
+    let todos = JSON.parse(localStorage.getItem("todos")) || [];
+    let form = document.querySelector("form");
+    let text = document.getElementById("todotext");
+    let list = document.getElementById("todolist");
+    function renderTodos() {
+      list.textContent = "";
+      todos.forEach((item, index) => {
+        let newwLi = document.createElement("li");
+        let newBtn = document.createElement("button");
+        newBtn.type = "button";
+        newwLi.textContent = item;
+        newBtn.textContent = "Delete";
+        newwLi.append(newBtn);
+        list.append(newwLi);
+        newBtn.addEventListener("click", () => {
+          todos.splice(index, 1);
+          localStorage.setItem("todos", JSON.stringify(todos));
+          renderTodos();
+        });
+      });
+    }
+    form.addEventListener("submit", addText);
+
+    function addText(event) {
+      event.preventDefault();
+      let value = text.value;
+      if (!value) {
+        alert("Please write first");
+        return;
+      }
+      todos.push(value);
+      localStorage.setItem("todos", JSON.stringify(todos));
+      text.value = "";
+      renderTodos();
+    }
+    renderTodos();
+  </script>
+</html>
