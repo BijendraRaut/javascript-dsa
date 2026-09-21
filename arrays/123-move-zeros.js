@@ -3,7 +3,9 @@ function moveZerosToEnd(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] !== 0) {
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+      let temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
       j++;
     }
   }
